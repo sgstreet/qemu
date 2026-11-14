@@ -6,6 +6,7 @@
 
 #include "qemu/osdep.h"
 #include "qapi/error.h"
+#include "qapi/qapi-events-ui.h"
 #include "qemu/config-file.h"
 #include "qemu/main-loop.h"
 #include "qemu/module.h"
@@ -79,6 +80,8 @@ static void input_linux_toggle_grab(InputLinux *il)
         return;
     }
     il->grab_active = !il->grab_active;
+    qapi_event_send_input_linux_grab(
+        object_get_canonical_path_component(OBJECT(il)), il->grab_active);
 
     if (!il->grab_all) {
         return;

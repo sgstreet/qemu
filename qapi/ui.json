@@ -1315,6 +1315,29 @@
             'events' : [ 'InputEvent' ] } }
 
 ##
+# @INPUT_LINUX_GRAB:
+#
+# Emitted when an input-linux object grabs or releases its host evdev
+# device, e.g. after the grab-toggle key combination was pressed.
+#
+# @id: the id of the input-linux object
+#
+# @active: true if the device is now grabbed (input goes to the
+#     guest), false if it was released (input goes to the host)
+#
+# Since: 11.2
+#
+# .. qmp-example::
+#
+#     <- { "event": "INPUT_LINUX_GRAB",
+#          "data": { "id": "kbd1", "active": false },
+#          "timestamp": { "seconds": 1763100000, "microseconds": 123456 } }
+##
+{ 'event': 'INPUT_LINUX_GRAB',
+  'data': { 'id': 'str', 'active': 'bool' },
+  'if': 'CONFIG_LINUX' }
+
+##
 # @DisplayGTK:
 #
 # GTK display options.
